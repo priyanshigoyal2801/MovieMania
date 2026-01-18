@@ -551,12 +551,27 @@ PORT=5000
 | `npm run build` | Production build |
 | `npm run install:all` | Install all dependencies |
 
-### Verification Scripts
+### Build & Deployment Scripts
 | Script | Description |
 |--------|-------------|
-| `node server/verify-ai.js` | Test Generative AI integration & API key |
-| `node server/verify-api.js` | Check API health & Server connectivity |
-| `node server/verify-ai-auth.js` | Verify authenticated API calls (requires local DB) |
+| `node server/scripts/build.cjs` | Generate build metadata (run before deploying) |
+
+### Version & Health Endpoints
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/version` | Basic version info |
+| `GET /api/version/full` | Full build details |
+| `GET /api/version/health` | Health check for monitoring |
+| `GET /api/version/stats` | Usage statistics (admin only) |
+
+### Build Watermarking
+
+Every API response includes watermark headers for tracing:
+```http
+X-MovieMania-Version: v1.0.0-dev
+X-MovieMania-Instance: a1b2c3d4e5f6
+X-MovieMania-Build: mkjqii8g-bf3bf1
+```
 
 </details>
 
