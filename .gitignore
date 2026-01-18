@@ -17,6 +17,8 @@ dist/
 build/
 .next/
 out/
+server/.env.build
+server/build-info.json
 
 # Logs
 logs/
