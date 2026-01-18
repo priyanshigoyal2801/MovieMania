@@ -5,6 +5,7 @@ First off, thank you for considering contributing to MovieMania! 🎬 It's peopl
 ## 📋 Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
+- [Contributor License Agreement](#contributor-license-agreement)
 - [Getting Started](#getting-started)
 - [How Can I Contribute?](#how-can-i-contribute)
 - [Development Setup](#development-setup)
@@ -15,6 +16,33 @@ First off, thank you for considering contributing to MovieMania! 🎬 It's peopl
 ## Code of Conduct
 
 This project and everyone participating in it is governed by our commitment to creating a welcoming and inclusive environment. By participating, you are expected to uphold this standard. Please be respectful, constructive, and considerate in all interactions.
+
+## Contributor License Agreement
+
+> ⚠️ **Important**: Before your first contribution can be accepted, you must sign our [Contributor License Agreement (CLA)](CLA.md).
+
+### Why a CLA?
+
+The CLA protects both you and the project:
+- **Legal clarity**: Ensures you have the right to contribute the code
+- **Ownership documentation**: Maintains clear records of who contributed what
+- **Project protection**: Allows the project to be relicensed if needed in the future
+- **Your protection**: Documents that you retain copyright to your contributions
+
+### How to Sign
+
+**For your first contribution**, include this statement in your pull request:
+
+```
+I have read the CLA at CLA.md and I hereby sign the CLA.
+
+Signed: [Your Full Legal Name]
+Date: [YYYY-MM-DD]
+GitHub Username: [Your GitHub Username]
+Email: [Your Email Address]
+```
+
+See [CLA.md](CLA.md) for full details and corporate contributor instructions.
 
 ## Getting Started
 
@@ -185,6 +213,7 @@ docs(readme): update installation steps
 
 ### PR Checklist
 
+- [ ] I have signed the [CLA](CLA.md) (first-time contributors only)
 - [ ] My code follows the project's style guidelines
 - [ ] I have tested my changes locally
 - [ ] I have updated documentation as needed
