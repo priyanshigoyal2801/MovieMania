@@ -14,17 +14,42 @@ class GeminiService {
     }
 
     async makeRequestWithRetry(operation, maxRetries = 3) {
+        const getStatus = (err) => err?.status ?? err?.response?.status;
+        const getMessage = (err) => String(err?.message ?? '');
+        const isQuotaExceeded429 = (err) => {
+            const status = getStatus(err);
+            if (status !== 429) return false;
+            const msg = getMessage(err);
+            return (
+                msg.includes('Quota exceeded') ||
+                msg.includes('RESOURCE_EXHAUSTED') ||
+                msg.includes('RATE_LIMIT_EXCEEDED')
+            );
+        };
+
         for (let i = 0; i < maxRetries; i++) {
             try {
                 return await operation();
             } catch (error) {
-                if (error.message.includes('429') && i < maxRetries - 1) {
-                    const delay = Math.pow(2, i) * 1000 + (Math.random() * 500);
-                    console.warn(`Gemini API 429 hit. Retrying in ${delay}ms...`);
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                } else {
-                    throw error;
+                // If Gemini quota is exceeded, retries won't help (often shows quota_limit_value 0)
+                if (isQuotaExceeded429(error)) {
+                    const e = new Error('Gemini quota exceeded');
+                    e.status = 429;
+                    e.userMessage = 'AI is temporarily unavailable (Gemini quota exceeded). Try again later or increase your Gemini quota.';
+                    throw e;
                 }
+
+                const status = getStatus(error);
+
+                // Retry only for transient 429s
+                if (status === 429 && i < maxRetries - 1) {
+                    const delay = Math.min(8000, Math.pow(2, i) * 1000 + (Math.random() * 500));
+                    console.warn(`Gemini API rate limit hit. Retrying in ${delay}ms...`);
+                    await new Promise((resolve) => setTimeout(resolve, delay));
+                    continue;
+                }
+
+                throw error;
             }
         }
     }
@@ -62,7 +87,12 @@ class GeminiService {
 
     async generateReviewDraft(movieTitle, rating, genres) {
         return this.makeRequestWithRetry(async () => {
-            if (!this.ai) throw new Error('AI service not initialized');
+            if (!this.ai) {
+                const e = new Error('AI service not initialized');
+                e.status = 503;
+                e.userMessage = 'AI features are disabled on the server.';
+                throw e;
+            }
 
             const prompt = `Write a short, engaging movie review for "${movieTitle}" (Genres: ${genres.join(', ')}). 
             The rating is ${rating}/5. 
@@ -80,7 +110,12 @@ class GeminiService {
 
     async expandThoughts(bulletPoints) {
         return this.makeRequestWithRetry(async () => {
-            if (!this.ai) throw new Error('AI service not initialized');
+            if (!this.ai) {
+                const e = new Error('AI service not initialized');
+                e.status = 503;
+                e.userMessage = 'AI features are disabled on the server.';
+                throw e;
+            }
 
             const prompt = `Expand these bullet points into a cohesive movie review paragraph. 
             Maintain the original tone.
@@ -100,7 +135,12 @@ class GeminiService {
 
     async removeSpoilers(reviewText) {
         return this.makeRequestWithRetry(async () => {
-            if (!this.ai) throw new Error('AI service not initialized');
+            if (!this.ai) {
+                const e = new Error('AI service not initialized');
+                e.status = 503;
+                e.userMessage = 'AI features are disabled on the server.';
+                throw e;
+            }
 
             const prompt = `Rewrite the following movie review to remove any major plot spoilers while keeping the sentiment and opinion intact.
             If there are no spoilers, return the text as is.
@@ -118,7 +158,12 @@ class GeminiService {
 
     async analyzeSentiment(text) {
         return this.makeRequestWithRetry(async () => {
-            if (!this.ai) throw new Error('AI service not initialized');
+            if (!this.ai) {
+                const e = new Error('AI service not initialized');
+                e.status = 503;
+                e.userMessage = 'AI features are disabled on the server.';
+                throw e;
+            }
 
             const prompt = `Analyze the sentiment of this movie review.
             Return a JSON object with:
@@ -141,7 +186,12 @@ class GeminiService {
 
     async suggestTags(reviewText) {
         return this.makeRequestWithRetry(async () => {
-            if (!this.ai) throw new Error('AI service not initialized');
+            if (!this.ai) {
+                const e = new Error('AI service not initialized');
+                e.status = 503;
+                e.userMessage = 'AI features are disabled on the server.';
+                throw e;
+            }
 
             const prompt = `Suggest 5 relevant tags for this movie review. 
             Tags should be single words or short phrases (max 2 words).
@@ -160,7 +210,12 @@ class GeminiService {
 
     async parseNaturalQuery(query) {
         return this.makeRequestWithRetry(async () => {
-            if (!this.ai) throw new Error('AI service not initialized');
+            if (!this.ai) {
+                const e = new Error('AI service not initialized');
+                e.status = 503;
+                e.userMessage = 'AI features are disabled on the server.';
+                throw e;
+            }
 
             const prompt = `Parse this natural language movie/TV search query into structured search parameters.
             Query: "${query}"
@@ -186,7 +241,12 @@ class GeminiService {
 
     async findSimilarMovies(movieTitle, modifier) {
         return this.makeRequestWithRetry(async () => {
-            if (!this.ai) throw new Error('AI service not initialized');
+            if (!this.ai) {
+                const e = new Error('AI service not initialized');
+                e.status = 503;
+                e.userMessage = 'AI features are disabled on the server.';
+                throw e;
+            }
 
             const prompt = `Suggest 5 movies that are similar to "${movieTitle}" but are specifically "${modifier}".
             Return a JSON array of objects with:
@@ -205,7 +265,12 @@ class GeminiService {
 
     async predictRating(userTaste, movieData) {
         return this.makeRequestWithRetry(async () => {
-            if (!this.ai) throw new Error('AI service not initialized');
+            if (!this.ai) {
+                const e = new Error('AI service not initialized');
+                e.status = 503;
+                e.userMessage = 'AI features are disabled on the server.';
+                throw e;
+            }
 
             const prompt = `Predict a rating (0-5 stars) for the movie "${movieData.title}" based on this user's taste profile.
             
@@ -236,7 +301,12 @@ class GeminiService {
 
     async calculateTasteMatch(userTaste, movieData) {
         return this.makeRequestWithRetry(async () => {
-            if (!this.ai) throw new Error('AI service not initialized');
+            if (!this.ai) {
+                const e = new Error('AI service not initialized');
+                e.status = 503;
+                e.userMessage = 'AI features are disabled on the server.';
+                throw e;
+            }
 
             const prompt = `Calculate a "Taste Match" percentage for this user and movie.
             
@@ -259,7 +329,12 @@ class GeminiService {
 
     async generateInsights(userProfile) {
         return this.makeRequestWithRetry(async () => {
-            if (!this.ai) throw new Error('AI service not initialized');
+            if (!this.ai) {
+                const e = new Error('AI service not initialized');
+                e.status = 503;
+                e.userMessage = 'AI features are disabled on the server.';
+                throw e;
+            }
 
             const prompt = `Generate 4 fun, personalized insights about this user's movie taste.
             

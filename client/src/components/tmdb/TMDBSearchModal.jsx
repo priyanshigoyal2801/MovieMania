@@ -9,7 +9,6 @@ import LoadingSpinner from '../common/LoadingSpinner';
 import { useDebounce } from '../../hooks/useDebounce';
 import tmdbService from '../../services/tmdbService';
 import { getPosterUrl } from '../../utils/helpers';
-import PredictionBadge from '../ai/PredictionBadge';
 
 export default function TMDBSearchModal({ isOpen, onClose, onSelect }) {
     const [searchQuery, setSearchQuery] = useState('');
@@ -132,9 +131,6 @@ export default function TMDBSearchModal({ isOpen, onClose, onSelect }) {
                                                     {movie.tmdbRating.toFixed(1)}
                                                 </span>
                                             )}
-                                            <div onClick={(e) => e.stopPropagation()}>
-                                                <PredictionBadge tmdbId={movie.tmdbId} type="movie" showRating={true} showMatch={true} />
-                                            </div>
                                         </div>
 
                                         {movie.overview && (

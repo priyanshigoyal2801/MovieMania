@@ -29,7 +29,7 @@ export default function AIReviewAssistant({
             toast.success('Review draft generated!');
             setIsOpen(false);
         } catch (error) {
-            toast.error('Failed to generate review');
+            toast.error(error?.message || 'Failed to generate review');
         } finally {
             setIsLoading(false);
             setActiveAction(null);
@@ -49,7 +49,7 @@ export default function AIReviewAssistant({
             toast.success('Review expanded!');
             setIsOpen(false);
         } catch (error) {
-            toast.error('Failed to expand review');
+            toast.error(error?.message || 'Failed to expand review');
         } finally {
             setIsLoading(false);
             setActiveAction(null);
@@ -66,7 +66,7 @@ export default function AIReviewAssistant({
             toast.success('Spoilers removed!');
             setIsOpen(false);
         } catch (error) {
-            toast.error('Failed to process review');
+            toast.error(error?.message || 'Failed to process review');
         } finally {
             setIsLoading(false);
             setActiveAction(null);
@@ -90,7 +90,7 @@ export default function AIReviewAssistant({
             }
             setIsOpen(false);
         } catch (error) {
-            toast.error('Failed to suggest tags');
+            toast.error(error?.message || 'Failed to suggest tags');
         } finally {
             setIsLoading(false);
             setActiveAction(null);
