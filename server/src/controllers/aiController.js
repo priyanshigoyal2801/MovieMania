@@ -19,7 +19,9 @@ export const generateReviewDraft = asyncHandler(async (req, res) => {
         ApiResponse.success(res, { draft });
     } catch (error) {
         console.error('AI Generation Error:', error);
-        ApiResponse.error(res, 'Failed to generate review draft', 503);
+        const status = error?.status || 503;
+        const message = error?.userMessage || 'Failed to generate review draft';
+        ApiResponse.error(res, message, status);
     }
 });
 
@@ -40,7 +42,9 @@ export const expandThoughts = asyncHandler(async (req, res) => {
         ApiResponse.success(res, { review });
     } catch (error) {
         console.error('AI Expansion Error:', error);
-        ApiResponse.error(res, 'Failed to expand thoughts', 503);
+        const status = error?.status || 503;
+        const message = error?.userMessage || 'Failed to expand thoughts';
+        ApiResponse.error(res, message, status);
     }
 });
 
@@ -61,7 +65,9 @@ export const removeSpoilers = asyncHandler(async (req, res) => {
         ApiResponse.success(res, { cleanText });
     } catch (error) {
         console.error('AI Spoiler Removal Error:', error);
-        ApiResponse.error(res, 'Failed to remove spoilers', 503);
+        const status = error?.status || 503;
+        const message = error?.userMessage || 'Failed to remove spoilers';
+        ApiResponse.error(res, message, status);
     }
 });
 
@@ -82,7 +88,9 @@ export const analyzeSentiment = asyncHandler(async (req, res) => {
         ApiResponse.success(res, analysis);
     } catch (error) {
         console.error('AI Analysis Error:', error);
-        ApiResponse.error(res, 'Failed to analyze sentiment', 503);
+        const status = error?.status || 503;
+        const message = error?.userMessage || 'Failed to analyze sentiment';
+        ApiResponse.error(res, message, status);
     }
 });
 
@@ -103,6 +111,8 @@ export const suggestTags = asyncHandler(async (req, res) => {
         ApiResponse.success(res, { tags });
     } catch (error) {
         console.error('AI Tag Suggestion Error:', error);
-        ApiResponse.error(res, 'Failed to suggest tags', 503);
+        const status = error?.status || 503;
+        const message = error?.userMessage || 'Failed to suggest tags';
+        ApiResponse.error(res, message, status);
     }
 });

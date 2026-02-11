@@ -3,7 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Brain, Percent, Star, Loader2, Info } from 'lucide-react';
 import aiService from '../../services/aiService';
 
-export default function PredictionBadge({ tmdbId, type = 'movie', showMatch = true, showRating = true }) {
+const ratingCache = new Map();
+const matchCache = new Map();
+
+export default function PredictionBadge({ tmdbId, type = 'movie', showMatch = true, showRating = true, enabled = true }) {
     const [prediction, setPrediction] = useState(null);
     const [match, setMatch] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -12,22 +15,44 @@ export default function PredictionBadge({ tmdbId, type = 'movie', showMatch = tr
     useEffect(() => {
         let isMounted = true;
         const fetchData = async () => {
+            const cacheKey = `${type}:${tmdbId}`;
+
+            const cachedPrediction = showRating ? ratingCache.get(cacheKey) : null;
+            const cachedMatch = showMatch ? matchCache.get(cacheKey) : null;
+
+            if (isMounted) {
+                if (cachedPrediction) setPrediction(cachedPrediction);
+                if (cachedMatch) setMatch(cachedMatch);
+            }
+
+            // If everything needed is cached, don't hit the backend.
+            if ((showRating ? Boolean(cachedPrediction) : true) && (showMatch ? Boolean(cachedMatch) : true)) {
+                return;
+            }
+
             setIsLoading(true);
             try {
                 const promises = [];
-                if (showRating) promises.push(aiService.predictRating(tmdbId, type));
-                if (showMatch) promises.push(aiService.getTasteMatch(tmdbId, type));
+                if (showRating && !cachedPrediction) promises.push(aiService.predictRating(tmdbId, type));
+                if (showMatch && !cachedMatch) promises.push(aiService.getTasteMatch(tmdbId, type));
 
                 const results = await Promise.allSettled(promises);
 
                 if (isMounted) {
-                    if (showRating && results[0].status === 'fulfilled') {
-                        setPrediction(results[0].value);
+                    let resultIndex = 0;
+
+                    if (showRating && !cachedPrediction) {
+                        if (results[resultIndex]?.status === 'fulfilled') {
+                            ratingCache.set(cacheKey, results[resultIndex].value);
+                            setPrediction(results[resultIndex].value);
+                        }
+                        resultIndex += 1;
                     }
-                    if (showMatch) {
-                        const matchIndex = showRating ? 1 : 0;
-                        if (results[matchIndex]?.status === 'fulfilled') {
-                            setMatch(results[matchIndex].value);
+
+                    if (showMatch && !cachedMatch) {
+                        if (results[resultIndex]?.status === 'fulfilled') {
+                            matchCache.set(cacheKey, results[resultIndex].value);
+                            setMatch(results[resultIndex].value);
                         }
                     }
                 }
@@ -38,10 +63,10 @@ export default function PredictionBadge({ tmdbId, type = 'movie', showMatch = tr
             }
         };
 
-        if (tmdbId) fetchData();
+        if (enabled && tmdbId) fetchData();
 
         return () => { isMounted = false; };
-    }, [tmdbId, type, showMatch, showRating]);
+    }, [enabled, tmdbId, type, showMatch, showRating]);
 
     if (!prediction && !match && !isLoading) return null;
 
