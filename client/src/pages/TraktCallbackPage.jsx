@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import integrationService from '../../services/integrationService';
-import { useAuth } from '../../context/AuthContext';
+import integrationService from '../services/integrationService';
+import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
 
 export default function TraktCallback() {
