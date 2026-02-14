@@ -27,7 +27,7 @@ public class addMovie {
         email.clear();
         Thread.sleep(1000);
 
-        email.sendKeys("priyanshi2801ad@gmail.com");
+        email.sendKeys("your_email_id");
         Thread.sleep(1000);
 
         WebElement password = wait.until(
@@ -36,7 +36,7 @@ public class addMovie {
         password.clear();
         Thread.sleep(1000);
 
-        password.sendKeys("Kusum1122@");
+        password.sendKeys("your_password");
         Thread.sleep(1000);
 
         WebElement loginBtn = wait.until(
