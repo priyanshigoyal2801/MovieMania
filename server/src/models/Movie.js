@@ -120,7 +120,8 @@ const movieSchema = new mongoose.Schema({
 });
 
 // Indexes for common queries
-movieSchema.index({ tmdbId: 1 }, { unique: true });
+// `tmdbId` is defined with `unique: true` in the schema above —
+// avoid duplicating the index declaration here to prevent warnings
 movieSchema.index({ addedBy: 1 });
 movieSchema.index({ watchedDate: -1 });
 movieSchema.index({ myRating: -1 });

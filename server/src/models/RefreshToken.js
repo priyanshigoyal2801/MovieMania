@@ -29,7 +29,7 @@ const refreshTokenSchema = new mongoose.Schema({
 });
 
 // Indexes
-refreshTokenSchema.index({ token: 1 }, { unique: true });
+// `token` has `unique: true` on the field definition, so avoid re-declaring it here
 refreshTokenSchema.index({ userId: 1 });
 refreshTokenSchema.index({ expiresAt: 1 });
 

@@ -136,7 +136,8 @@ const tvShowSchema = new mongoose.Schema({
 });
 
 // Indexes for common queries
-tvShowSchema.index({ tmdbId: 1 }, { unique: true });
+// `tmdbId` is defined with `unique: true` in the schema above —
+// avoid duplicating the index declaration here to prevent warnings
 tvShowSchema.index({ addedBy: 1 });
 tvShowSchema.index({ startedDate: -1 });
 tvShowSchema.index({ myRating: -1 });

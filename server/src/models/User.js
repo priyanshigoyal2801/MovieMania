@@ -73,9 +73,8 @@ const userSchema = new mongoose.Schema({
     toObject: { virtuals: true }
 });
 
-// Index for faster queries
-userSchema.index({ email: 1 });
-userSchema.index({ username: 1 });
+// Indexes are defined inline using `unique: true` on fields above
+// (avoids duplicate index warnings when Mongoose creates indexes)
 
 /**
  * Pre-save hook to hash password

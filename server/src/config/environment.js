@@ -58,7 +58,7 @@ const env = {
     tmdbBaseUrl: process.env.TMDB_BASE_URL || 'https://api.themoviedb.org/3',
 
     // CORS
-    allowedOrigins: (process.env.ALLOWED_ORIGINS || 'https://movie-mania-puce.vercel.app/')
+    allowedOrigins: (process.env.ALLOWED_ORIGINS || 'http://localhost:5173')
         .split(',')
         .map((origin) => origin.trim())
         .filter(Boolean),
