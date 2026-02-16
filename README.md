@@ -1,12 +1,12 @@
 <div align="center">
 
 # 🎬 MovieMania
-
+<a href="https://moviemania.pratham.codes">
 <img src="https://img.shields.io/badge/MovieMania-Your%20Personal%20Cinema-6366f1?style=for-the-badge&logo=film&logoColor=white" alt="MovieMania" />
+</a>
 
 ### **Track what you watch. Discover what's next. Own your entertainment journey.**
 
-<br />
 
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=white)](https://react.dev/)
@@ -19,8 +19,43 @@
 
 [🚀 Quick Start](#-quick-start) • [✨ Features](#-feature-highlights) • [📺 TV Shows](#-tv-shows-tracking) • [📖 Documentation](#-documentation) • [🛠️ Tech Stack](#️-tech-stack)
 
----
+<br />
 
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/dashboard.png" alt="Dashboard" />
+      <br />
+      <sub><b>Dashboard</b> — your library overview with stats & recents</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/search-modal.png" alt="Search" />
+      <br />
+      <sub><b>Search</b> — TMDB-powered lookup for movies & TV</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/add-movie.png" alt="Add Movie" />
+      <br />
+      <sub><b>Add Movie</b> — ratings, reviews, tags, and AI assist</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/recommendations.png" alt="Recommendations" />
+      <br />
+      <sub><b>For You</b> — personalized AI recommendations</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="docs/screenshots/appearance-settings.png" alt="Appearance Settings" />
+      <br />
+      <sub><b>Appearance</b> — theme modes, accents, and accessibility</sub>
+    </td>
+  </tr>
+</table>
+
+<br />
 </div>
 
 ## 🎯 What is MovieMania?
