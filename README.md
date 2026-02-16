@@ -21,39 +21,7 @@
 
 <br />
 
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <img src="docs/screenshots/dashboard.png" alt="Dashboard" />
-      <br />
-      <sub><b>Dashboard</b> — your library overview with stats & recents</sub>
-    </td>
-    <td align="center" width="50%">
-      <img src="docs/screenshots/search-modal.png" alt="Search" />
-      <br />
-      <sub><b>Search</b> — TMDB-powered lookup for movies & TV</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <img src="docs/screenshots/add-movie.png" alt="Add Movie" />
-      <br />
-      <sub><b>Add Movie</b> — ratings, reviews, tags, and AI assist</sub>
-    </td>
-    <td align="center" width="50%">
-      <img src="docs/screenshots/recommendations.png" alt="Recommendations" />
-      <br />
-      <sub><b>For You</b> — personalized AI recommendations</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2">
-      <img src="docs/screenshots/appearance-settings.png" alt="Appearance Settings" />
-      <br />
-      <sub><b>Appearance</b> — theme modes, accents, and accessibility</sub>
-    </td>
-  </tr>
-</table>
+
 
 <br />
 </div>
@@ -106,35 +74,40 @@ MovieMania is a **full-featured entertainment tracking platform** built with the
 </table>
 
 ---
-
-## � Screenshots
-
-<details>
-<summary><b>Click to view application screenshots</b></summary>
-
-<br />
-
-### Dashboard
-![Dashboard](docs/screenshots/dashboard.png)
-*Main dashboard showing your movie collection with stats and recently added titles*
-
-### Movie Search
-![Search Modal](docs/screenshots/search-modal.png)
-*TMDB-powered search to find any movie or TV show*
-
-### Add Movie
-![Add Movie](docs/screenshots/add-movie.png)
-*Add movies with ratings, reviews, tags, and AI-assisted review writing*
-
-### Personalized Recommendations
-![Recommendations](docs/screenshots/recommendations.png)
-*AI-powered "For You" page with taste profile and personalized picks*
-
-### Appearance Settings
-![Appearance Settings](docs/screenshots/appearance-settings.png)
-*Customizable themes, accent colors, and accessibility options*
-
-</details>
+## Screenshots
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/dashboard.png" alt="Dashboard" />
+      <br />
+      <sub><b>Dashboard</b> — your library overview with stats & recents</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/search-modal.png" alt="Search" />
+      <br />
+      <sub><b>Search</b> — TMDB-powered lookup for movies & TV</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/add-movie.png" alt="Add Movie" />
+      <br />
+      <sub><b>Add Movie</b> — ratings, reviews, tags, and AI assist</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/recommendations.png" alt="Recommendations" />
+      <br />
+      <sub><b>For You</b> — personalized AI recommendations</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="docs/screenshots/appearance-settings.png" alt="Appearance Settings" />
+      <br />
+      <sub><b>Appearance</b> — theme modes, accents, and accessibility</sub>
+    </td>
+  </tr>
+</table>
 
 ## �🚀 Quick Start
 
