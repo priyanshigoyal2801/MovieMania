@@ -109,7 +109,7 @@ MovieMania is a **full-featured entertainment tracking platform** built with the
   </tr>
 </table>
 
-## �🚀 Quick Start
+## 🚀 Quick Start
 
 Get up and running in **under 5 minutes**:
 
