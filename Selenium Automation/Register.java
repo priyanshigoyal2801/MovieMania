@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
 
@@ -54,7 +55,7 @@ public class Register {
                 By.cssSelector("[data-testid='submit-button']")
         );
         Thread.sleep(2000);
-        submitBtn.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitBtn);
 
         wait.until(ExpectedConditions.urlContains("/dashboard"));
 
