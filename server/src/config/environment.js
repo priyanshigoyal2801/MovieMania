@@ -58,7 +58,10 @@ const env = {
     tmdbBaseUrl: process.env.TMDB_BASE_URL || 'https://api.themoviedb.org/3',
 
     // CORS
-    allowedOrigins: (process.env.ALLOWED_ORIGINS || 'http://localhost:5173')
+     allowedOrigins: (
+        process.env.ALLOWED_ORIGINS ||
+        'http://localhost:5173,http://localhost:3000,https://moviemania.pratham.codes'
+    )
         .split(',')
         .map((origin) => origin.trim())
         .filter(Boolean),
