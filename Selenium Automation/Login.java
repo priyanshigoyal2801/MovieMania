@@ -7,25 +7,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class MovieMania {
+public class Login {
 
     public static void main(String[] args) throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        driver.get("http://localhost:5173/login");
+        driver.get("https://moviemania.pratham.codes/login");
         driver.manage().window().maximize();
         Thread.sleep(2000);
 
         WebElement email = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.name("email"))
         );
-        email.sendKeys("your_email_id");
+        email.sendKeys("testing2@gmail.com");
         Thread.sleep(1500);
 
         WebElement password = driver.findElement(By.name("password"));
-        password.sendKeys("your_password");
+        password.sendKeys("TestPass2@");
         Thread.sleep(1500);
 
         WebElement loginBtn = driver.findElement(
@@ -35,8 +35,8 @@ public class MovieMania {
         loginBtn.click();
 
         wait.until(ExpectedConditions.urlContains("/dashboard"));
-        Thread.sleep(3000);
-
+        Thread.sleep(6000);
+        System.out.println("User Login Successful");
         driver.quit();
     }
 }

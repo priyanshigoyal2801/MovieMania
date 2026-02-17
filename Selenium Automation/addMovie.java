@@ -4,7 +4,7 @@ import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 
-public class addMovie {
+public class AddMovie {
 
     public static void safeClick(WebDriver driver, WebElement el){
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
@@ -27,7 +27,7 @@ public class addMovie {
         email.clear();
         Thread.sleep(1000);
 
-        email.sendKeys("your_email_id");
+        email.sendKeys("testing2@gmail.com");
         Thread.sleep(1000);
 
         WebElement password = wait.until(
@@ -36,7 +36,7 @@ public class addMovie {
         password.clear();
         Thread.sleep(1000);
 
-        password.sendKeys("your_password");
+        password.sendKeys("TestPass2@");
         Thread.sleep(1000);
 
         WebElement loginBtn = wait.until(
@@ -134,10 +134,9 @@ public class addMovie {
         Thread.sleep(1000);
 
         wait.until(ExpectedConditions.urlContains("/dashboard"));
-        Thread.sleep(1000);
+        Thread.sleep(5000);
 
         System.out.println("Movie Added Successfully");
-        Thread.sleep(1000);
 
         driver.quit();
     }
